@@ -68,16 +68,6 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel5.setText("Classroom Allocation");
 
-        jTextField1.setText("jTextField1");
-
-        jTextField2.setText("jTextField2");
-
-        jTextField3.setText("jTextField3");
-
-        jTextField4.setText("jTextField4");
-
-        jTextField5.setText("jTextField5");
-
         jScrollPane1.setViewportView(jTable1);
 
         jButton1.setText("Add");
