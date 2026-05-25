@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 public class DBConnection {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/ab_training_school?useSSL=false";
+    private static final String URL = "jdbc:mysql://localhost:3306/abc_training_school?useSSL=false";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
@@ -21,7 +21,7 @@ public class DBConnection {
 //            Creating connection
             con = DriverManager.getConnection(URL, USER, PASSWORD);
 
-            JOptionPane.showMessageDialog(null, "Database Connected!");
+            JOptionPane.showMessageDialog(null, "Database Connected Successfully !");
 
         } catch (Exception e) {
 
