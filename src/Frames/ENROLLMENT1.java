@@ -10,31 +10,28 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
-  
+public class ENROLLMENT1 extends javax.swing.JFrame {
 
-    public class ENROLLMENT1 extends javax.swing.JFrame {
+    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ENROLLMENT1.class.getName());
+    Connection con = new DBConnection().dbConn();
+    DefaultTableModel model = new DefaultTableModel(new String[]{"Student ID", "Offering No", "Enrollment Date", "Grade",}, 0);
 
-        private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ENROLLMENT1.class.getName());
-        Connection con = new DBConnection().dbConn();
-        DefaultTableModel model = new DefaultTableModel(new String[]{"Student ID", "Offering No", "Enrollment Date","Grade",}, 0);
+    public ENROLLMENT1() {
+        initComponents();
+        setDefault();
+        tabale.setModel(model);
 
-        public ENROLLMENT1() {
-            initComponents();
-            setDefault();
-            tabale.setModel(model);
-            
-            jButton3.setText("UPDATE");
-            jButton3.addActionListener(this::jButton3ActionPerformed);
-            
-           
-            jButton5.setText("DELETE");
-            jButton5.addActionListener(this::jButton5ActionPerformed);
-            
-            jButton6.setText("CLEAR");
-            jButton6.addActionListener(this::jButton6ActionPerformed);
-        }
+        jButton3.setText("UPDATE");
+        jButton3.addActionListener(this::jButton3ActionPerformed);
 
-        @SuppressWarnings("unchecked")
+        jButton5.setText("DELETE");
+        jButton5.addActionListener(this::jButton5ActionPerformed);
+
+        jButton6.setText("CLEAR");
+        jButton6.addActionListener(this::jButton6ActionPerformed);
+    }
+
+    @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -166,6 +163,7 @@ import javax.swing.table.DefaultTableModel;
         );
 
         jButton2.setText("Search");
+        jButton2.addActionListener(this::jButton2ActionPerformed);
 
         tabale.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -239,11 +237,11 @@ import javax.swing.table.DefaultTableModel;
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void tabaleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabaleMouseClicked
-       loadSelectedCourse();
+        loadSelectedCourse();
     }//GEN-LAST:event_tabaleMouseClicked
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-         UpdateData();
+        UpdateData();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -251,8 +249,12 @@ import javax.swing.table.DefaultTableModel;
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-       Clear();
+        Clear();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        SearchData();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
         /**
          * @param args the command line arguments
@@ -281,81 +283,77 @@ import javax.swing.table.DefaultTableModel;
 
         private void InsertData() {
 
-    String studentIDStr = StudentID.getText().trim();
-    String offeringNoStr = OfferingNo.getText().trim();
-    String enrollDateStr = Date.getText().trim();
-    String gradeStr = Grade.getText().trim();
+            String studentIDStr = StudentID.getText().trim();
+            String offeringNoStr = OfferingNo.getText().trim();
+            String enrollDateStr = Date.getText().trim();
+            String gradeStr = Grade.getText().trim();
 
-   
-    if (studentIDStr.isEmpty() || offeringNoStr.isEmpty() || enrollDateStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please include all mandatory information!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    PreparedStatement pstmt = null;
-    String sql = "INSERT INTO Enrollment (Student_ID, Offering_No, Enrollment_Date, Grade) VALUES (?, ?, ?, ?)";
-
-    try {
-       
-        int studentID = Integer.parseInt(studentIDStr);
-        int offeringNo = Integer.parseInt(offeringNoStr);
-
-        
-        if (studentID <= 0 || offeringNo <= 0) {
-            JOptionPane.showMessageDialog(this, "Student ID and Offering No must be positive numbers!", "Input Error", JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-
-        
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false); 
-        
-        java.util.Date parsedDate = sdf.parse(enrollDateStr);
-        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-
-       
-        pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, studentID);
-        pstmt.setInt(2, offeringNo);
-        pstmt.setDate(3, sqlDate);
-
-        if (gradeStr.isEmpty()) {
-            pstmt.setNull(4, java.sql.Types.VARCHAR);
-        } else {
-            pstmt.setString(4, gradeStr);
-        }
-
-        int rowsInserted = pstmt.executeUpdate();
-
-        if (rowsInserted > 0) {
-            JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-           
-            StudentID.setText("");
-            OfferingNo.setText("");
-            Date.setText("");
-            Grade.setText("");
-        }
-
-    } catch (NumberFormatException numEx) {
-        JOptionPane.showMessageDialog(this, "Please enter valid numbers for ID and Offering No!", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (java.text.ParseException dateEx) {
-        
-        JOptionPane.showMessageDialog(this, "Invalid date or format! Please enter a valid date in YYYY-MM-DD format.", "Date Error", JOptionPane.ERROR_MESSAGE);
-    } catch (java.sql.SQLException ex) {
-        
-        JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
-    } finally {
-        try {
-            if (pstmt != null) {
-                pstmt.close();
-                setDefault(); 
+            if (studentIDStr.isEmpty() || offeringNoStr.isEmpty() || enrollDateStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please include all mandatory information!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        } catch (java.sql.SQLException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+
+            PreparedStatement pstmt = null;
+            String sql = "INSERT INTO Enrollment (Student_ID, Offering_No, Enrollment_Date, Grade) VALUES (?, ?, ?, ?)";
+
+            try {
+
+                int studentID = Integer.parseInt(studentIDStr);
+                int offeringNo = Integer.parseInt(offeringNoStr);
+
+                if (studentID <= 0 || offeringNo <= 0) {
+                    JOptionPane.showMessageDialog(this, "Student ID and Offering No must be positive numbers!", "Input Error", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                sdf.setLenient(false);
+
+                java.util.Date parsedDate = sdf.parse(enrollDateStr);
+                java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+                pstmt = con.prepareStatement(sql);
+                pstmt.setInt(1, studentID);
+                pstmt.setInt(2, offeringNo);
+                pstmt.setDate(3, sqlDate);
+
+                if (gradeStr.isEmpty()) {
+                    pstmt.setNull(4, java.sql.Types.VARCHAR);
+                } else {
+                    pstmt.setString(4, gradeStr);
+                }
+
+                int rowsInserted = pstmt.executeUpdate();
+
+                if (rowsInserted > 0) {
+                    JOptionPane.showMessageDialog(this, "Student registered successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    StudentID.setText("");
+                    OfferingNo.setText("");
+                    Date.setText("");
+                    Grade.setText("");
+                }
+
+            } catch (NumberFormatException numEx) {
+                JOptionPane.showMessageDialog(this, "Please enter valid numbers for ID and Offering No!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.text.ParseException dateEx) {
+
+                JOptionPane.showMessageDialog(this, "Invalid date or format! Please enter a valid date in YYYY-MM-DD format.", "Date Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.sql.SQLException ex) {
+
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (pstmt != null) {
+                        pstmt.close();
+                        setDefault();
+                    }
+                } catch (java.sql.SQLException ex) {
+                    logger.log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
         }
-    }
-}
+
         private ArrayList<EnrollStudent> getEnrollmentList(String query) {
             ArrayList<EnrollStudent> EnrollmentList = new ArrayList<>();
 
@@ -403,178 +401,190 @@ import javax.swing.table.DefaultTableModel;
             }
         }
 
-    
-
-    private void setDefault() {
-        String query = "SELECT * from enrollment";
-       EnrollmentDetails(query);
-    }
-    
-    private void loadSelectedCourse() {
-        int row = tabale.getSelectedRow();
-        
-        if (row == -1) {
-        return; 
-    }
-        
-        StudentID.setText(model.getValueAt(row, 0).toString());
-        OfferingNo.setText(model.getValueAt(row, 1).toString());
-        Date.setText(model.getValueAt(row, 2).toString());
-        Object gradeValue = model.getValueAt(row, 3);
-        Grade.setText(gradeValue != null ? gradeValue.toString() : "");
-        
-        
-    
-    }
-    
-    private void UpdateData() {
-    String studentIDStr = StudentID.getText().trim();
-    String offeringNoStr = OfferingNo.getText().trim();
-    String enrollDateStr = Date.getText().trim();
-    String gradeStr = Grade.getText().trim();
-
-   
-    if (studentIDStr.isEmpty() || offeringNoStr.isEmpty() || enrollDateStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please select a record from the table to update!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    PreparedStatement pstmt = null;
-   
-    String sql = "UPDATE Enrollment SET Enrollment_Date = ?, Grade = ? WHERE Student_ID = ? AND Offering_No = ?";
-
-    try {
-     
-        int studentID = Integer.parseInt(studentIDStr);
-        int offeringNo = Integer.parseInt(offeringNoStr);
-
-      
-        java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false); 
-        
-        java.util.Date parsedDate = sdf.parse(enrollDateStr);
-        java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
-
-        pstmt = con.prepareStatement(sql);
-        
-      
-        pstmt.setDate(1, sqlDate);
-
-        
-        if (gradeStr.isEmpty()) {
-            pstmt.setNull(2, java.sql.Types.VARCHAR);
-        } else {
-            pstmt.setString(2, gradeStr);
+        private void setDefault() {
+            String query = "SELECT * from enrollment";
+            EnrollmentDetails(query);
         }
 
-        pstmt.setInt(3, studentID);
-        pstmt.setInt(4, offeringNo);
+        private void loadSelectedCourse() {
+            int row = tabale.getSelectedRow();
 
-        int rowsUpdated = pstmt.executeUpdate();
+            if (row == -1) {
+                return;
+            }
 
-        if (rowsUpdated > 0) {
-            JOptionPane.showMessageDialog(this, "Enrollment updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+            StudentID.setText(model.getValueAt(row, 0).toString());
+            OfferingNo.setText(model.getValueAt(row, 1).toString());
+            Date.setText(model.getValueAt(row, 2).toString());
+            Object gradeValue = model.getValueAt(row, 3);
+            Grade.setText(gradeValue != null ? gradeValue.toString() : "");
 
-          
+        }
+
+        private void UpdateData() {
+            String studentIDStr = StudentID.getText().trim();
+            String offeringNoStr = OfferingNo.getText().trim();
+            String enrollDateStr = Date.getText().trim();
+            String gradeStr = Grade.getText().trim();
+
+            if (studentIDStr.isEmpty() || offeringNoStr.isEmpty() || enrollDateStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please select a record from the table to update!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            PreparedStatement pstmt = null;
+
+            String sql = "UPDATE Enrollment SET Enrollment_Date = ?, Grade = ? WHERE Student_ID = ? AND Offering_No = ?";
+
+            try {
+
+                int studentID = Integer.parseInt(studentIDStr);
+                int offeringNo = Integer.parseInt(offeringNoStr);
+
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
+                sdf.setLenient(false);
+
+                java.util.Date parsedDate = sdf.parse(enrollDateStr);
+                java.sql.Date sqlDate = new java.sql.Date(parsedDate.getTime());
+
+                pstmt = con.prepareStatement(sql);
+
+                pstmt.setDate(1, sqlDate);
+
+                if (gradeStr.isEmpty()) {
+                    pstmt.setNull(2, java.sql.Types.VARCHAR);
+                } else {
+                    pstmt.setString(2, gradeStr);
+                }
+
+                pstmt.setInt(3, studentID);
+                pstmt.setInt(4, offeringNo);
+
+                int rowsUpdated = pstmt.executeUpdate();
+
+                if (rowsUpdated > 0) {
+                    JOptionPane.showMessageDialog(this, "Enrollment updated successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    StudentID.setText("");
+                    OfferingNo.setText("");
+                    Date.setText("");
+                    Grade.setText("");
+                } else {
+
+                    JOptionPane.showMessageDialog(this, "Record not found in the database!", "Update Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (NumberFormatException numEx) {
+                JOptionPane.showMessageDialog(this, "Invalid ID or Offering No format!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.text.ParseException dateEx) {
+                JOptionPane.showMessageDialog(this, "Invalid date format! Please use YYYY-MM-DD.", "Date Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.sql.SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (pstmt != null) {
+                        pstmt.close();
+                        setDefault();
+                    }
+                } catch (java.sql.SQLException ex) {
+                    logger.log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        private void DeleteData() {
+            String studentIDStr = StudentID.getText().trim();
+            String offeringNoStr = OfferingNo.getText().trim();
+
+            if (studentIDStr.isEmpty() || offeringNoStr.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Please select a record from the table to delete!", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int dialogResult = JOptionPane.showConfirmDialog(this,
+                    "Are you sure you want to delete this enrollment record?",
+                    "Warning",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+
+            if (dialogResult != JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            PreparedStatement pstmt = null;
+
+            String sql = "DELETE FROM Enrollment WHERE Student_ID = ? AND Offering_No = ?";
+
+            try {
+                int studentID = Integer.parseInt(studentIDStr);
+                int offeringNo = Integer.parseInt(offeringNoStr);
+
+                pstmt = con.prepareStatement(sql);
+                pstmt.setInt(1, studentID);
+                pstmt.setInt(2, offeringNo);
+
+                int rowsDeleted = pstmt.executeUpdate();
+
+                if (rowsDeleted > 0) {
+                    JOptionPane.showMessageDialog(this, "Enrollment record deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+                    StudentID.setText("");
+                    OfferingNo.setText("");
+                    Date.setText("");
+                    Grade.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(this, "Record not found in the database!", "Delete Error", JOptionPane.ERROR_MESSAGE);
+                }
+
+            } catch (NumberFormatException numEx) {
+                JOptionPane.showMessageDialog(this, "Invalid ID or Offering No format!", "Input Error", JOptionPane.ERROR_MESSAGE);
+            } catch (java.sql.SQLException ex) {
+                JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
+            } finally {
+                try {
+                    if (pstmt != null) {
+                        pstmt.close();
+                        setDefault();
+                    }
+                } catch (java.sql.SQLException ex) {
+                    logger.log(java.util.logging.Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        private void SearchData() {
+            String searchText = jTextField5.getText().trim();
+
+            if (searchText.isEmpty()) {
+                setDefault();
+                return;
+            }
+
+            try {
+
+                int searchNum = Integer.parseInt(searchText);
+
+                String query = "SELECT * FROM enrollment WHERE Student_ID = " + searchNum + " OR Offering_No = " + searchNum;
+                EnrollmentDetails(query);
+
+                if (model.getRowCount() == 0) {
+                    JOptionPane.showMessageDialog(this, "No records found matching your search!", "Information", JOptionPane.INFORMATION_MESSAGE);
+                    setDefault();
+                }
+
+            } catch (NumberFormatException numEx) {
+                JOptionPane.showMessageDialog(this, "Please enter a valid numeric ID to search!", "Input Error", JOptionPane.ERROR_MESSAGE);
+                setDefault();
+            }
+        }
+
+        private void Clear() {
             StudentID.setText("");
             OfferingNo.setText("");
             Date.setText("");
             Grade.setText("");
-        } else {
-            
-            JOptionPane.showMessageDialog(this, "Record not found in the database!", "Update Error", JOptionPane.ERROR_MESSAGE);
+            tabale.clearSelection();
         }
-
-    } catch (NumberFormatException numEx) {
-        JOptionPane.showMessageDialog(this, "Invalid ID or Offering No format!", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (java.text.ParseException dateEx) {
-        JOptionPane.showMessageDialog(this, "Invalid date format! Please use YYYY-MM-DD.", "Date Error", JOptionPane.ERROR_MESSAGE);
-    } catch (java.sql.SQLException ex) {
-        JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
-    } finally {
-        try {
-            if (pstmt != null) {
-                pstmt.close();
-                setDefault(); 
-            }
-        } catch (java.sql.SQLException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-}
-    
-    private void DeleteData() {
-    String studentIDStr = StudentID.getText().trim();
-    String offeringNoStr = OfferingNo.getText().trim();
-
-    
-    if (studentIDStr.isEmpty() || offeringNoStr.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Please select a record from the table to delete!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    
-    int dialogResult = JOptionPane.showConfirmDialog(this, 
-            "Are you sure you want to delete this enrollment record?", 
-            "Warning", 
-            JOptionPane.YES_NO_OPTION, 
-            JOptionPane.WARNING_MESSAGE);
-            
-    if (dialogResult != JOptionPane.YES_OPTION) {
-        return;
-    }
-
-    PreparedStatement pstmt = null;
-    
-    String sql = "DELETE FROM Enrollment WHERE Student_ID = ? AND Offering_No = ?";
-
-    try {
-        int studentID = Integer.parseInt(studentIDStr);
-        int offeringNo = Integer.parseInt(offeringNoStr);
-
-        pstmt = con.prepareStatement(sql);
-        pstmt.setInt(1, studentID);
-        pstmt.setInt(2, offeringNo);
-
-        int rowsDeleted = pstmt.executeUpdate();
-
-        if (rowsDeleted > 0) {
-            JOptionPane.showMessageDialog(this, "Enrollment record deleted successfully!", "Success", JOptionPane.INFORMATION_MESSAGE);
-
-            
-            StudentID.setText("");
-            OfferingNo.setText("");
-            Date.setText("");
-            Grade.setText("");
-        } else {
-            JOptionPane.showMessageDialog(this, "Record not found in the database!", "Delete Error", JOptionPane.ERROR_MESSAGE);
-        }
-
-    } catch (NumberFormatException numEx) {
-        JOptionPane.showMessageDialog(this, "Invalid ID or Offering No format!", "Input Error", JOptionPane.ERROR_MESSAGE);
-    } catch (java.sql.SQLException ex) {
-        JOptionPane.showMessageDialog(this, "Database error: " + ex.getMessage(), "SQL Error", JOptionPane.ERROR_MESSAGE);
-    } finally {
-        try {
-            if (pstmt != null) {
-                pstmt.close();
-                setDefault(); 
-            }
-        } catch (java.sql.SQLException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-    }
-}
-    
- 
-
-
-private void Clear() {                                         
-    StudentID.setText("");
-    OfferingNo.setText("");
-    Date.setText("");
-    Grade.setText("");
-}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Date;
     private javax.swing.JTextField Grade;
