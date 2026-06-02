@@ -54,12 +54,38 @@ public class MainFrame extends javax.swing.JFrame {
         tfClassAlloc = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAddBatch = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        btnAddBatch = new javax.swing.JButton();
+        btnUpdateBatch = new javax.swing.JButton();
+        btnRemoveBatch = new javax.swing.JButton();
+        btnSearchBatch = new javax.swing.JButton();
+        btnClearBatch = new javax.swing.JButton();
         cbxSelectCourse = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        tfCoCode = new javax.swing.JTextField();
+        tfCoDesc = new javax.swing.JTextField();
+        tfCoName = new javax.swing.JTextField();
+        tfLevel = new javax.swing.JTextField();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButtonUp = new javax.swing.JButton();
+        jButtonAdd = new javax.swing.JButton();
+        lblCoDes = new javax.swing.JLabel();
+        lblCoName = new javax.swing.JLabel();
+        jButDelete = new javax.swing.JButton();
+        jButtClear = new javax.swing.JButton();
+        jButSearch = new javax.swing.JButton();
+        lblLevel = new javax.swing.JLabel();
+        jLabCoFee = new javax.swing.JLabel();
+        tfCoFees = new javax.swing.JTextField();
+        lblCoFee = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -91,16 +117,19 @@ public class MainFrame extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tblAddBatch);
 
-        jButton1.setText("Add");
-        jButton1.addActionListener(this::jButton1ActionPerformed);
+        btnAddBatch.setText("Add");
+        btnAddBatch.addActionListener(this::btnAddBatchActionPerformed);
 
-        jButton2.setText("Update");
+        btnUpdateBatch.setText("Update");
+        btnUpdateBatch.addActionListener(this::btnUpdateBatchActionPerformed);
 
-        jButton3.setText("Remove");
+        btnRemoveBatch.setText("Remove");
+        btnRemoveBatch.addActionListener(this::btnRemoveBatchActionPerformed);
 
-        jButton4.setText("Search");
+        btnSearchBatch.setText("Search");
 
-        jButton5.setText("Clear");
+        btnClearBatch.setText("Clear");
+        btnClearBatch.addActionListener(this::btnClearBatchActionPerformed);
 
         cbxSelectCourse.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
 
@@ -118,15 +147,15 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(271, 271, 271)
-                .addComponent(jButton1)
+                .addComponent(btnAddBatch)
                 .addGap(98, 98, 98)
-                .addComponent(jButton2)
+                .addComponent(btnUpdateBatch)
                 .addGap(98, 98, 98)
-                .addComponent(jButton3)
+                .addComponent(btnRemoveBatch)
                 .addGap(92, 92, 92)
-                .addComponent(jButton4)
+                .addComponent(btnSearchBatch)
                 .addGap(92, 92, 92)
-                .addComponent(jButton5)
+                .addComponent(btnClearBatch)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(138, 138, 138)
@@ -135,16 +164,15 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jLabel1))
                 .addGap(83, 83, 83)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(tfStartDate)
-                        .addComponent(cbxSelectCourse, 0, 280, Short.MAX_VALUE))
-                    .addComponent(tfBatchNo, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(tfStartDate, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(tfBatchNo, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                    .addComponent(cbxSelectCourse, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(133, 133, 133)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(tfTuitFee)
                     .addComponent(tfClassAlloc, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -176,17 +204,265 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(tfStartDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jButton5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                    .addComponent(btnAddBatch)
+                    .addComponent(btnUpdateBatch)
+                    .addComponent(btnRemoveBatch)
+                    .addComponent(btnSearchBatch)
+                    .addComponent(btnClearBatch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 138, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab("Add Batch", jPanel3);
+
+        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel12.setText("Course ");
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Course Details"));
+
+        jLabel13.setText("Course Code");
+
+        jLabel14.setText("Course Name");
+
+        jLabel15.setText("Course Description");
+
+        jLabel16.setText("Level");
+
+        jLabel6.setText("Tutor");
+
+        tfCoDesc.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfCoDescFocusLost(evt);
+            }
+        });
+        tfCoDesc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCoDescKeyReleased(evt);
+            }
+        });
+
+        tfCoName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfCoNameFocusLost(evt);
+            }
+        });
+        tfCoName.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCoNameKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                tfCoNameKeyTyped(evt);
+            }
+        });
+
+        tfLevel.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfLevelFocusLost(evt);
+            }
+        });
+        tfLevel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfLevelKeyReleased(evt);
+            }
+        });
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select Tutor", "Amodh", "Dasula" }));
+
+        jButtonUp.setText("UPDATE");
+        jButtonUp.addActionListener(this::jButtonUpActionPerformed);
+
+        jButtonAdd.setText("ADD");
+        jButtonAdd.addActionListener(this::jButtonAddActionPerformed);
+
+        lblCoDes.setForeground(new java.awt.Color(255, 0, 0));
+        lblCoDes.setText(" ");
+
+        lblCoName.setForeground(new java.awt.Color(255, 0, 0));
+        lblCoName.setText(" ");
+
+        jButDelete.setText("DELETE");
+        jButDelete.addActionListener(this::jButDeleteActionPerformed);
+
+        jButtClear.setText("CLEAR");
+        jButtClear.addActionListener(this::jButtClearActionPerformed);
+
+        jButSearch.setText("SEARCH");
+        jButSearch.addActionListener(this::jButSearchActionPerformed);
+
+        lblLevel.setForeground(new java.awt.Color(255, 0, 0));
+        lblLevel.setText(" ");
+
+        jLabCoFee.setText("Course Fee");
+
+        tfCoFees.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                tfCoFeesFocusLost(evt);
+            }
+        });
+        tfCoFees.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                tfCoFeesKeyReleased(evt);
+            }
+        });
+
+        lblCoFee.setForeground(new java.awt.Color(255, 0, 0));
+        lblCoFee.setText(" ");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(60, 60, 60)
+                .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(64, 64, 64)
+                .addComponent(jButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73)
+                .addComponent(jButtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(77, 77, 77)
+                .addComponent(jButDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addComponent(jButSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblCoFee, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(41, 41, 41))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(105, 105, 105)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(tfCoDesc)
+                                    .addComponent(tfCoName)
+                                    .addComponent(jComboBox1, 0, 280, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 142, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabCoFee, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 393, Short.MAX_VALUE)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblCoDes, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel5Layout.createSequentialGroup()
+                                        .addGap(3, 3, 3)
+                                        .addComponent(lblCoName, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tfCoCode, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(tfCoFees, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(14, 14, 14)
+                                .addComponent(lblLevel, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(91, 91, 91))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel14)
+                    .addComponent(tfCoName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCoCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel13))
+                .addGap(18, 18, 18)
+                .addComponent(lblCoName)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel15)
+                    .addComponent(tfCoDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfLevel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblCoDes)
+                    .addComponent(lblLevel))
+                .addGap(25, 25, 25)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(tfCoFees, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabCoFee))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblCoFee)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonUp, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(63, Short.MAX_VALUE))
+        );
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Course Code", "Course Name", "Course Description", "Level", "Tutor", "Course Fee"
+            }
+        ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(86, 86, 86)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(73, 73, 73))
+        );
+
+        jTabbedPane1.addTab("Add Course", jPanel1);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -218,21 +494,93 @@ public class MainFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddBatchActionPerformed
         insertData();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnAddBatchActionPerformed
 
-    private void tfBatchNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBatchNoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_tfBatchNoActionPerformed
+    private void tblAddBatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAddBatchMouseClicked
+        loadSelectedBatches();
+    }//GEN-LAST:event_tblAddBatchMouseClicked
 
     private void tfStartDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfStartDateActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_tfStartDateActionPerformed
 
-    private void tblAddBatchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblAddBatchMouseClicked
-        loadSelectedBatches();
-    }//GEN-LAST:event_tblAddBatchMouseClicked
+    private void tfBatchNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tfBatchNoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tfBatchNoActionPerformed
+
+    private void tfCoDescFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCoDescFocusLost
+//        isValidate();
+    }//GEN-LAST:event_tfCoDescFocusLost
+
+    private void tfCoDescKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCoDescKeyReleased
+//        isValidate();
+    }//GEN-LAST:event_tfCoDescKeyReleased
+
+    private void tfCoNameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCoNameFocusLost
+//        isValidate();
+    }//GEN-LAST:event_tfCoNameFocusLost
+
+    private void tfCoNameKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCoNameKeyReleased
+//        isValidate();
+    }//GEN-LAST:event_tfCoNameKeyReleased
+
+    private void tfCoNameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCoNameKeyTyped
+//        updateCourseNo();
+    }//GEN-LAST:event_tfCoNameKeyTyped
+
+    private void tfLevelFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfLevelFocusLost
+//        isValidate();
+    }//GEN-LAST:event_tfLevelFocusLost
+
+    private void tfLevelKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfLevelKeyReleased
+//        isValidate();
+    }//GEN-LAST:event_tfLevelKeyReleased
+
+    private void jButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpActionPerformed
+//        updateCourse();
+    }//GEN-LAST:event_jButtonUpActionPerformed
+
+    private void jButtonAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAddActionPerformed
+        insertData();
+    }//GEN-LAST:event_jButtonAddActionPerformed
+
+    private void jButDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButDeleteActionPerformed
+//        deleteStudent();
+    }//GEN-LAST:event_jButDeleteActionPerformed
+
+    private void jButtClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtClearActionPerformed
+//        clearData();
+    }//GEN-LAST:event_jButtClearActionPerformed
+
+    private void jButSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButSearchActionPerformed
+//        searchCourse();
+    }//GEN-LAST:event_jButSearchActionPerformed
+
+    private void tfCoFeesFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfCoFeesFocusLost
+//        isValidate();
+    }//GEN-LAST:event_tfCoFeesFocusLost
+
+    private void tfCoFeesKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfCoFeesKeyReleased
+//        isValidate();
+    }//GEN-LAST:event_tfCoFeesKeyReleased
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+//        loadSelectedCourse();
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btnClearBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearBatchActionPerformed
+        clearSelections();
+    }//GEN-LAST:event_btnClearBatchActionPerformed
+
+    private void btnUpdateBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateBatchActionPerformed
+        updateBatch();
+    }//GEN-LAST:event_btnUpdateBatchActionPerformed
+
+    private void btnRemoveBatchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveBatchActionPerformed
+        deleteStudent();
+    }//GEN-LAST:event_btnRemoveBatchActionPerformed
 
     public static void main(String args[]) {
 
@@ -316,19 +664,19 @@ public class MainFrame extends javax.swing.JFrame {
 
         setBatchDetails(query);
     }
-    
+
     private void loadSelectedBatches() {
-        
+
         int row = tblAddBatch.getSelectedRow();
-        
+
         cbxSelectCourse.setSelectedItem(model.getValueAt(row, 3).toString());
-                
+
         tfBatchNo.setText(model.getValueAt(row, 1).toString());
-        
+
         tfStartDate.setText(model.getValueAt(row, 2).toString());
-        
+
         tfTuitFee.setText(model.getValueAt(row, 4).toString());
-        
+
         tfClassAlloc.setText(model.getValueAt(row, 5).toString());
     }
 
@@ -405,27 +753,151 @@ public class MainFrame extends javax.swing.JFrame {
         });
     }
 
+    private void updateBatch() {
+
+        if (tblAddBatch.getSelectedRowCount() != 1) {
+
+            JOptionPane.showMessageDialog(this, "Please Select a row to Update!");
+
+            return;
+
+        }
+
+        if (tblAddBatch.getSelectedRowCount() == 1) {
+
+            int index = tblAddBatch.getSelectedRow();
+
+            String batchNo = tfBatchNo.getText().trim();
+            String stDate = tfStartDate.getText().trim();
+            String courseCode = (String) cbxSelectCourse.getSelectedItem();
+            String tuitFee = tfTuitFee.getText().trim();
+            String clsAlloc = tfClassAlloc.getText().trim();
+
+            try {
+                String query = "UPDATE course_offering SET offering_no=?, start_date=?, tuition_fee=?, course_code=?, class_room_no=? WHERE id=?";
+
+                PreparedStatement pst = con.prepareStatement(query);
+
+                pst.setString(1, batchNo);
+                pst.setString(2, stDate);
+                pst.setString(3, tuitFee);
+                pst.setString(4, courseCode);
+                pst.setString(5, clsAlloc);
+                pst.setString(6, model.getValueAt(index, 0).toString());
+
+                pst.executeUpdate();
+
+                JOptionPane.showMessageDialog(this, "Course Updated");
+
+                setDefault();
+
+                pst.close();
+
+            } catch (Exception e) {
+
+                JOptionPane.showMessageDialog(this, e.getMessage());
+
+            }
+        } else {
+
+            JOptionPane.showMessageDialog(this, "Please Select a row to Update!");
+        }
+    }
+
+    private void deleteStudent() {
+
+        if (tblAddBatch.getSelectedRowCount() == 1) {
+
+            int index = tblAddBatch.getSelectedRow();
+
+            String coName = (String) model.getValueAt(index, 1);
+
+            int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete" + coName + "?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
+
+            if (confirm == JOptionPane.YES_OPTION) {
+
+                try {
+                    String query = "DELETE FROM course_offering WHERE id = ?";
+
+                    PreparedStatement pst = con.prepareStatement(query);
+
+                    pst.setString(1, model.getValueAt(index, 0).toString());
+
+                    pst.execute();
+
+                    setDefault();
+
+                    pst.close();
+
+                } catch (Exception e) {
+
+                    JOptionPane.showMessageDialog(this, "Error :" + e.getMessage());
+
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please Select a row to Delete!");
+        }
+    }
+
+    private void clearSelections() {
+        tfBatchNo.setText(null);
+        tfStartDate.setText(null);
+        tfCoFees.setText(null);
+        tfClassAlloc.setText(null);
+
+        cbxSelectCourse.setSelectedIndex(-1);
+
+        tblAddBatch.clearSelection();
+
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddBatch;
+    private javax.swing.JButton btnClearBatch;
+    private javax.swing.JButton btnRemoveBatch;
+    private javax.swing.JButton btnSearchBatch;
+    private javax.swing.JButton btnUpdateBatch;
     private javax.swing.JComboBox<String> cbxSelectCourse;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButDelete;
+    private javax.swing.JButton jButSearch;
+    private javax.swing.JButton jButtClear;
+    private javax.swing.JButton jButtonAdd;
+    private javax.swing.JButton jButtonUp;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabCoFee;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lblCoDes;
+    private javax.swing.JLabel lblCoFee;
+    private javax.swing.JLabel lblCoName;
+    private javax.swing.JLabel lblLevel;
     private javax.swing.JTable tblAddBatch;
     private javax.swing.JTextField tfBatchNo;
     private javax.swing.JTextField tfClassAlloc;
+    private javax.swing.JTextField tfCoCode;
+    private javax.swing.JTextField tfCoDesc;
+    private javax.swing.JTextField tfCoFees;
+    private javax.swing.JTextField tfCoName;
+    private javax.swing.JTextField tfLevel;
     private javax.swing.JTextField tfStartDate;
     private javax.swing.JTextField tfTuitFee;
     // End of variables declaration//GEN-END:variables
