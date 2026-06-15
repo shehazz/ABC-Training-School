@@ -4,7 +4,7 @@
  */
 package Frames;
 
-import Classes.DBconnection;
+import Classes.DBConnection;
 import Classes.RegForm;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class class_room extends javax.swing.JFrame {
 
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(class_room.class.getName());
-    Connection con = new DBconnection().dpconn();
+    Connection con = new DBConnection().dbConn();
     DefaultTableModel model = new DefaultTableModel(new String[]{"Class Room ID", "Class Room Number", "Location", "Seat Capacity"}, 0);
 
     /**
