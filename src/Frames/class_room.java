@@ -254,7 +254,7 @@ public class class_room extends javax.swing.JFrame {
             return;
         }
 
-        String query = "INSERT INTO names (class_Room_Number,location,seat_Capacity) VALUES (?,?,?)";
+        String query = "INSERT INTO classroom (class_Room_Number,location,seat_Capacity) VALUES (?,?,?)";
 
         try {
 
@@ -324,7 +324,7 @@ public class class_room extends javax.swing.JFrame {
     }
 
     private void setDefault() {
-        String query = "SELECT * FROM names";
+        String query = "SELECT * FROM classroom";
 
         setRegList(query);
     }
@@ -360,7 +360,7 @@ public class class_room extends javax.swing.JFrame {
 
             String seatcapacity = tf_seatcapacity.getText().trim();
 
-            String query = "UPDATE names SET class_Room_Number = ?,location = ?,seat_Capacity = ? WHERE class_Room_Id = ? ";
+            String query = "UPDATE classroom SET class_Room_Number = ?,location = ?,seat_Capacity = ? WHERE class_Room_Id = ? ";
 
             try {
                 PreparedStatement pst = con.prepareStatement(query);
@@ -404,7 +404,7 @@ public class class_room extends javax.swing.JFrame {
 
                 try {
 
-                    String query = "DELETE FROM names WHERE class_Room_Id =?";
+                    String query = "DELETE FROM classroom WHERE class_Room_Id =?";
 
                     PreparedStatement pst = con.prepareStatement(query);
 
