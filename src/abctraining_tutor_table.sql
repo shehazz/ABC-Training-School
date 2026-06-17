@@ -1,0 +1,12 @@
+CREATE DATABASE IF NOT EXISTS abctraining;
+
+USE abctraining;
+
+CREATE TABLE IF NOT EXISTS tutor (
+    StaffNo INT(11) NOT NULL AUTO_INCREMENT,
+    TName VARCHAR(45) NOT NULL,
+    Address VARCHAR(100) NOT NULL,
+    Email VARCHAR(30) NOT NULL,
+    DateOfEmployment DATE NOT NULL,
+    PRIMARY KEY (StaffNo)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
