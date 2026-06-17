@@ -254,7 +254,7 @@ public class class_room extends javax.swing.JFrame {
             return;
         }
 
-        String query = "INSERT INTO classroom (class_Room_Number,location,seat_Capacity) VALUES (?,?,?)";
+        String query = "INSERT INTO classroom (room_no, location, seat_capacity) VALUES (?, ?, ?)";
 
         try {
 
@@ -290,8 +290,8 @@ public class class_room extends javax.swing.JFrame {
             while (rs.next()) {
 
                 RegForm student = new RegForm(
-                        rs.getInt("class_Room_Id"),
-                        rs.getString("class_Room_Number"),
+                        rs.getInt("classroom_id"),
+                        rs.getString("room_no"),
                         rs.getString("location"),
                         rs.getString("seat_Capacity")
                 );
@@ -314,8 +314,8 @@ public class class_room extends javax.swing.JFrame {
 
         for (RegForm reg : RegForm) {
             model.addRow(new Object[]{
-                reg.getClass_Room_Id(),
-                reg.getClass_Room_Number(),
+                reg.getClassroom_id(),
+                reg.getRoom_no(),
                 reg.getLocation(),
                 reg.getSeat_Capacity()
 
@@ -341,52 +341,52 @@ public class class_room extends javax.swing.JFrame {
 
     private void updateNames() {
 
-        if (tf_DetailView.getSelectedRowCount() != 1) {
+    if (tf_DetailView.getSelectedRowCount() != 1) {
+        JOptionPane.showMessageDialog(this,
+                "Please Select a row First",
+                "Warning",
+                JOptionPane.WARNING_MESSAGE
+        );
+        return;
+    }
 
-            JOptionPane.showMessageDialog(this,
-                    "Please Select a row First",
-                    "Warning",
-                    JOptionPane.WARNING_MESSAGE
-            );
+    int index = tf_DetailView.getSelectedRow();
+
+    
+    String classroomnumber = tf_classrooomnumber.getText().trim(); 
+    String location = tf_location.getText().trim();               
+    String seatcapacity = tf_seatcapacity.getText().trim();
+
+    String query = "UPDATE classroom SET room_no = ?, location = ?, seat_Capacity = ? WHERE classroom_id = ? ";
+
+    try {
+        PreparedStatement pst = con.prepareStatement(query);
+
+        
+        try {
+            pst.setInt(1, Integer.parseInt(classroomnumber));
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Class Room Number", "Input Error", JOptionPane.ERROR_MESSAGE);
             return;
         }
 
-        if (tf_DetailView.getSelectedRowCount() == 1) {
+        pst.setString(2, location);
+        pst.setString(3, seatcapacity);
+        pst.setString(4, model.getValueAt(index, 0).toString());
 
-            int index = tf_DetailView.getSelectedRow();
+        
+        pst.executeUpdate(); 
 
-            String location = tf_classrooomnumber.getText().trim();
-            String classroomnumber = tf_location.getText().trim();
+        JOptionPane.showMessageDialog(this, "Classroom Updated Successfully");
 
-            String seatcapacity = tf_seatcapacity.getText().trim();
+        setDefault();
+        clearSelection();
+        pst.close();
 
-            String query = "UPDATE classroom SET class_Room_Number = ?,location = ?,seat_Capacity = ? WHERE class_Room_Id = ? ";
-
-            try {
-                PreparedStatement pst = con.prepareStatement(query);
-
-                pst.setString(1, classroomnumber);
-                pst.setString(2, location);
-                pst.setString(3, seatcapacity);
-                pst.setString(4, model.getValueAt(index, 0).toString());
-
-                pst.executeUpdate();
-
-                JOptionPane.showMessageDialog(this, "Student Updated Successfully");
-
-                setDefault();
-
-                pst.close();
-
-            } catch (SQLException e) {
-
-                JOptionPane.showMessageDialog(this, "Error :" + e.getMessage());
-            }
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Please Select a Row");
-        }
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(this, "Error :" + e.getMessage());
     }
+}
 
     private void deleteNames() {
 
@@ -404,7 +404,7 @@ public class class_room extends javax.swing.JFrame {
 
                 try {
 
-                    String query = "DELETE FROM classroom WHERE class_Room_Id =?";
+                    String query = "DELETE FROM classroom WHERE classroom_Id =?";
 
                     PreparedStatement pst = con.prepareStatement(query);
 

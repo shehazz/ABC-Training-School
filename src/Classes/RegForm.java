@@ -4,32 +4,32 @@ package Classes;
 
 public class RegForm {
     
-    private int class_Room_Id ;
-    private String class_Room_Number;
+    private int classroom_id;
+    private String room_no;
     private String location;
     private String seat_Capacity;
 
-    public RegForm(int class_Room_Id, String class_Room_Number, String location, String seat_Capacity) {
-        this.class_Room_Id = class_Room_Id;
-        this.class_Room_Number = class_Room_Number;
+    public RegForm(int classroom_id, String room_no, String location, String seat_Capacity) {
+        this.classroom_id = classroom_id;
+        this.room_no = room_no;
         this.location = location;
         this.seat_Capacity = seat_Capacity;
     }
 
-    public int getClass_Room_Id() {
-        return class_Room_Id;
+    public int getClassroom_id() {
+        return classroom_id;
     }
 
-    public void setClass_Room_Id(int class_Room_Id) {
-        this.class_Room_Id = class_Room_Id;
+    public void setClassroom_id(int classroom_id) {
+        this.classroom_id = classroom_id;
     }
 
-    public String getClass_Room_Number() {
-        return class_Room_Number;
+    public String getRoom_no() {
+        return room_no;
     }
 
-    public void setClass_Room_Number(String class_Room_Number) {
-        this.class_Room_Number = class_Room_Number;
+    public void setRoom_no(String room_no) {
+        this.room_no = room_no;
     }
 
     public String getLocation() {
@@ -47,10 +47,7 @@ public class RegForm {
     public void setSeat_Capacity(String seat_Capacity) {
         this.seat_Capacity = seat_Capacity;
     }
-    
-    
 
-    
     
    
     
