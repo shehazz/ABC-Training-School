@@ -455,14 +455,14 @@ public class course_details extends javax.swing.JFrame {
     private void loadTutor() {
 
         try {
-            String query = "SELECT DISTINCT staff_no FROM tutor";
+            String query = "SELECT DISTINCT StaffNo FROM tutor";
             ResultSet rs = con.createStatement().executeQuery(query);
 
             jComboBox1.removeAllItems();
             jComboBox1.addItem("Select Tutor No");
 
             while (rs.next()) {
-                jComboBox1.addItem(rs.getString("staff_no"));
+                jComboBox1.addItem(rs.getString("StaffNo"));
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error" + e.getMessage());
